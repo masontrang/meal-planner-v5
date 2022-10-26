@@ -22,6 +22,14 @@ function App() {
   const [group, setGroup] = useState('');
   const [meals, setMeals] = useState(['sdfa']);
   const [recipes, setRecipes] = useState([]);
+  const [viewRecipeIndex, setViewRecipeIndex] = useState(0);
+  const [recipesLength, setRecipesLength] = useState(0);
+  const [dateArray, setDateArray] = useState([]);
+  const [selectedMealTime, setSelectedMealTime] = useState('');
+  const [selectedDate, setSelectedDate] = useState('');
+  const [selectedMealId, setSelectedMealId] = useState('');
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [displayedRecipe, setDisplayedRecipe] = useState('');
 
   const router = createBrowserRouter([
     {
@@ -75,8 +83,36 @@ function App() {
   ]);
   return (
     <React.StrictMode>
-      <NavBar></NavBar>
-      <DetailsContext.Provider value={{ meals, setMeals, recipes, setRecipes }}>
+      {' '}
+      <DetailsContext.Provider
+        value={{
+          user,
+          setUser,
+          group,
+          setGroup,
+          meals,
+          setMeals,
+          recipes,
+          setRecipes,
+          viewRecipeIndex,
+          setViewRecipeIndex,
+          recipesLength,
+          setRecipesLength,
+          dateArray,
+          selectedMealTime,
+          setSelectedMealTime,
+          selectedDate,
+          setSelectedDate,
+          selectedMealId,
+          setSelectedMealId,
+          selectedIndex,
+          setSelectedIndex,
+          displayedRecipe,
+          setDisplayedRecipe,
+        }}
+      >
+        <NavBar></NavBar>
+
         <RouterProvider router={router} />
       </DetailsContext.Provider>
     </React.StrictMode>

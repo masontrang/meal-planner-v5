@@ -45,7 +45,7 @@ function SignUp() {
   }
   return (
     <Container>
-      <Form onSubmit={handleSubmit}>
+      <Form>
         <h2 className="mb-3">Sign Up</h2>
         <FloatingLabel
           controlId="floatingInput"
@@ -70,7 +70,7 @@ function SignUp() {
           <Form.Control type="password" placeholder="Password" />
         </FloatingLabel>
         <FloatingLabel
-          controlId="floatingPassword"
+          controlId="floatingConfirmPassword"
           label="ConfirmPassword"
           className="mb-3"
           name="confirmPassword"

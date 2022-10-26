@@ -5,8 +5,11 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import { DetailsContext } from '../App';
+import React, { useContext } from 'react';
 
 function NavBar() {
+  const { user, group } = useContext(DetailsContext);
   return (
     <>
       {['xl'].map((expand) => (
@@ -25,38 +28,48 @@ function NavBar() {
                 </Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body>
-                <Nav className="justify-content-end flex-grow-1 pe-3">
-                  <Nav.Link href="/mealplanner">Plan</Nav.Link>
-                  {/* <Nav.Link href="/collaborate">Collaborate</Nav.Link> */}
-                  <NavDropdown
-                    title="Recipes"
-                    id={`offcanvasNavbarDropdown-expand-${expand}`}
-                  >
-                    <NavDropdown.Item href="/addrecipes">Add</NavDropdown.Item>
-                    <NavDropdown.Item href="/viewrecipes">
-                      View/Edit
-                    </NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item href="#action5">Print</NavDropdown.Item>
-                  </NavDropdown>
-                  <NavDropdown
-                    title="Account"
-                    id={`offcanvasNavbarDropdown-expand-${expand}`}
-                  >
-                    <NavDropdown.Item href="/collaborate">
-                      Collborate
-                    </NavDropdown.Item>
-                    <NavDropdown.Item href="/preferences">
-                      Preferences
-                    </NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item href="/logout">Logout</NavDropdown.Item>
-                  </NavDropdown>
+                {user && (
+                  <Nav className="justify-content-end flex-grow-1 pe-3">
+                    <Nav.Link href="/mealplanner">Plan</Nav.Link>
+                    {/* <Nav.Link href="/collaborate">Collaborate</Nav.Link> */}
+                    <NavDropdown
+                      title="Recipes"
+                      id={`offcanvasNavbarDropdown-expand-${expand}`}
+                    >
+                      <NavDropdown.Item href="/addrecipes">
+                        Add
+                      </NavDropdown.Item>
+                      <NavDropdown.Item href="/viewrecipes">
+                        View/Edit
+                      </NavDropdown.Item>
+                      <NavDropdown.Divider />
+                      <NavDropdown.Item href="#action5">Print</NavDropdown.Item>
+                    </NavDropdown>
+                    <NavDropdown
+                      title="Account"
+                      id={`offcanvasNavbarDropdown-expand-${expand}`}
+                    >
+                      <NavDropdown.Item href="/collaborate">
+                        Collborate
+                      </NavDropdown.Item>
+                      <NavDropdown.Item href="/preferences">
+                        Preferences
+                      </NavDropdown.Item>
+                      <NavDropdown.Divider />
+                    </NavDropdown>
 
-                  <Nav.Link href="/signup">Sign Up</Nav.Link>
-                  <Nav.Link href="/login">Login</Nav.Link>
-                  {/* <Nav.Link href="/logout">Logout</Nav.Link> */}
-                </Nav>
+                    <Nav.Link href="/logout">Logout of {user}</Nav.Link>
+                  </Nav>
+                )}
+
+                {!user && (
+                  <Nav className="justify-content-end flex-grow-1 pe-3">
+                    <Nav.Link href="/signup">Sign Up</Nav.Link>
+                    <Nav.Link href="/login">Login</Nav.Link>
+                    {/* <Nav.Link href="/logout">Logout</Nav.Link> */}
+                  </Nav>
+                )}
+
                 <Form className="d-flex">
                   <Form.Control
                     type="search"

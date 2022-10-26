@@ -3,28 +3,30 @@ const router = express.Router();
 const Meal = require('../models/Meal');
 const { protect } = require('../middleware/authMiddleware');
 const User = require('../models/User');
-
+const moment = require('moment');
+moment().format();
 //Meals
 router.use(protect);
 router.post('/getMeals', async (req, res) => {
   const userID = req.user._id;
-  let startDate = new Date(req.body.startDate);
+  let startDate = req.body.startDate;
+  // let endDate = new Date(req.body.endDate);
 
-  startDate.setUTCHours(0);
-  let endDate = new Date();
-  endDate.setDate(startDate.getDate() + 6);
-  endDate.setUTCHours(0);
-  startDate = startDate.toISOString();
-  endDate = endDate.toISOString();
+  // startDate.setUTCHours(0);
+  // let endDate = new Date();
+  // endDate.setDate(startDate.getDate() + 6);
+  // endDate.setUTCHours(0);
+  // startDate = startDate.toISOString();
+  // endDate = endDate.toISOString();
 
   console.log('getStart', startDate);
-  console.log('getEnd', endDate);
+  // console.log('getEnd', endDate);
 
   let foundMeals = [];
   if (!req.user.group) {
     foundMeals = await Meal.find({
       user: userID,
-      date: { $gte: startDate, $lte: endDate },
+      date: { $gte: startDate, $lte: startDate },
     })
       .populate('breakfast')
       .populate('lunch')
@@ -33,7 +35,7 @@ router.post('/getMeals', async (req, res) => {
     const groupID = req.user.group._id;
     foundMeals = await Meal.find({
       group: groupID,
-      date: { $gte: startDate, $lte: endDate },
+      date: { $gte: startDate, $lte: startDate },
     })
       .populate('breakfast')
       .populate('lunch')

@@ -30,38 +30,61 @@ function MealPlanner() {
   const getDateArray = () => {
     const array = [];
     for (let i = 0; i < 7; i++) {
-      startDate = moment().add(i + selection, 'd');
-      array.push(startDate);
+      let date = moment().add(i + selection, 'd');
+      array.push(date);
+      console.log('date', date);
     }
     setDateArray(array);
   };
 
   const getMeals = async (body) => {
-    // const response = await fetch('/api/meals/getMeals', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(body),
-    // });
-    // const json = await response.json();
+    const response = await fetch('/api/meals/getMeals', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    const json = await response.json();
 
-    setMeals([
-      {
-        _id: { $oid: '633cb21361c8c808d9abb718' },
-        date: { $date: { $numberLong: '1664842928800' } },
-        breakfast: [{ $oid: '63119e8b8ac54d9be212f43b' }],
-        lunch: [],
-        dinner: [],
-        user: { $oid: '63119b3773372d0f1a550986' },
-        __v: { $numberInt: '0' },
-      },
-    ]);
+    if (response.ok) {
+      const allMealsArray = [];
+      for (let i = 0; i < 7; i++) {
+        let nextDate = moment().add(i, 'd');
+        // nextDate.setDate(startDate.getDate() + i);
+        // nextDate.setUTCHours(0);
+        // nextDate = nextDate.toISOString();
+        console.log('next', nextDate);
+
+        const found = json.find((date) => date.date == nextDate);
+        if (found) {
+          allMealsArray.push(found);
+          console.log('found', found);
+        } else {
+          allMealsArray.push({
+            _id: '',
+            date: nextDate,
+            breakfast: [],
+            lunch: [],
+            dinner: [],
+          });
+        }
+      }
+      setMeals(allMealsArray);
+    }
+    return json;
   };
+
+  function loadMeals(startDate) {
+    const body = { startDate: startDate };
+    return getMeals(body);
+  }
 
   useEffect(() => {
     getDateArray();
+    loadMeals(startDate);
   }, [selection]);
+
   useEffect(() => {
-    getMeals();
+    loadMeals(startDate);
   }, []);
 
   return (
@@ -97,16 +120,13 @@ function MealPlanner() {
                           </Col>
                           <Col>
                             <h4>Lunch</h4>
-
                             <Row className="p-0 m-0">
                               <MealCard handleShow={handleShow} />
-
                               <MealCard handleShow={handleShow} />
                             </Row>
                           </Col>
                           <Col>
                             <h4>Dinner</h4>
-
                             <Row className="p-0 m-0">
                               <MealCard handleShow={handleShow} />
                               <MealCard handleShow={handleShow} />
