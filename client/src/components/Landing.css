@@ -1,0 +1,14 @@
+.Landing {
+  background-color: red;
+  height: 100vh;
+  width: 100vw;
+  padding: 0;
+}
+.splash-image {
+  width: 100%;
+  margin: 0;
+  height: 50%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  background-color: blue;
+}
