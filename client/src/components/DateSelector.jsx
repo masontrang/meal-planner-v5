@@ -35,12 +35,14 @@ function DateSelector(props) {
               onClick={() => {
                 props.setSelection(0);
               }}
+              style={{ fontSize: 'small' }}
             >
               Today
             </Button>
             <Button
               className="date-nav-button"
               variant="secondary"
+              style={{ fontSize: 'small', padding: '4px' }}
               onClick={() => {
                 props.setSelection(props.selection - 1);
               }}
@@ -49,6 +51,7 @@ function DateSelector(props) {
             </Button>
             {props.dateArray.map((date, index) => (
               <Button
+                style={{ fontSize: 'small', padding: '4px' }}
                 variant="light"
                 className="date-button"
                 onClick={() => {
@@ -59,6 +62,7 @@ function DateSelector(props) {
               </Button>
             ))}
             <Button
+              style={{ fontSize: 'small', padding: '4px' }}
               variant="secondary"
               className="date-nav-button"
               onClick={() => {

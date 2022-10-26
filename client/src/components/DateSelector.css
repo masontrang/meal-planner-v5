@@ -1,10 +1,17 @@
 .DateSelector {
   /* width: 100%; */
+  /* background-color: red; */
 }
 
 .date-button {
   /* height: 5rem; */
   /* width: 100%; */
+}
+
+@media screen and (max-width: 500px) {
+  .date-nav-button {
+    color: red;
+  }
 }
 
 .date-nav-button {

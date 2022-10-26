@@ -13,13 +13,13 @@ function AddRecipes() {
       <h2> Add Recipe</h2>
       <Form>
         <Row>
-          <Col>
+          <Col xs={9}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Recipe Name</Form.Label>
               <Form.Control type="text" placeholder="Enter Recipe Name" />
             </Form.Group>
           </Col>
-          <Col>
+          <Col xs={1}>
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
               <Form.Label>Favorite</Form.Label>
               <Form.Check type="checkbox" className="me-5" />
@@ -27,7 +27,7 @@ function AddRecipes() {
           </Col>
         </Row>
         <Row>
-          <Col>
+          <Col xs={1.5}>
             <Form.Label>Yield</Form.Label>
             <InputGroup className="mb-3">
               <Form.Control
@@ -39,11 +39,11 @@ function AddRecipes() {
                 <option>Measurement</option>
                 <option value="1">Servings</option>
                 <option value="2">Cups</option>
-                <option value="3">Three</option>
+                <option value="3">Other</option>
               </Form.Select>
             </InputGroup>
           </Col>
-          <Col>
+          <Col xs={1.5}>
             <Form.Label>Prep Time</Form.Label>
             <InputGroup className="mb-3">
               <Form.Control aria-label="Amount (to the nearest dollar)" />
@@ -53,7 +53,7 @@ function AddRecipes() {
             </InputGroup>
           </Col>
 
-          <Col>
+          <Col xs={1.5}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Cook Time</Form.Label>
               <InputGroup className="mb-3">

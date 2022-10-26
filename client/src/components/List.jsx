@@ -43,19 +43,23 @@ function List(props) {
         <ol>
           {items.map((item, i) => {
             return (
-              <Row>
-                <Col xs={1}>
-                  {props.title === 'Directions' && <p>Step {i + 1}</p>}
-                  {props.title === 'Ingredients' && <p>Item {i + 1}</p>}
+              <Row xs={1} className="mb-1">
+                <Col xs={1} className="m-0">
+                  {props.title === 'Directions' && (
+                    <p className="m-1">Step {i + 1} </p>
+                  )}
+                  {props.title === 'Ingredients' && (
+                    <p className="m-1">Item {i + 1} </p>
+                  )}
                 </Col>
-                <Col xs={8}>
-                  <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Col xs={7}>
+                  <Form.Group className="mb-0" controlId="formBasicEmail">
                     <Form.Control type="text" placeholder="Enter details" />
                   </Form.Group>
                 </Col>
-                <Col xs={2}>
+                <Col xs={4}>
                   <Button
-                    className="me-1"
+                    className="mx-1"
                     // className="list-button"
                     onClick={(e) => {
                       deleteItem(e, i);

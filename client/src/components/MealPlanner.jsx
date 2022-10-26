@@ -11,7 +11,10 @@ import AddMealCard from './AddMealCard';
 import Accordion from 'react-bootstrap/Accordion';
 import { DetailsContext } from '../App';
 import './MealPlanner.css';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 import moment from 'moment';
+import ViewMeal from './ViewMeal';
 moment().format();
 
 function MealPlanner() {
@@ -19,6 +22,10 @@ function MealPlanner() {
   var startDate = moment();
   const [dateArray, setDateArray] = useState([]);
   const [selection, setSelection] = useState(0);
+
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const getDateArray = () => {
     const array = [];
@@ -72,40 +79,38 @@ function MealPlanner() {
         {dateArray.map((date, index) => {
           return (
             <Accordion defaultActiveKey={index}>
-              <Accordion.Item eventKey={index}>
-                <Accordion.Header>
-                  <h4>{date.format('MMM D YYYY')}</h4>
+              <Accordion.Item eventKey={index} className="mb-1">
+                <Accordion.Header className="p-0">
+                  <b>{date.format('MMM D YYYY')}</b>
                 </Accordion.Header>
                 <Accordion.Body>
                   {meals.map((meal) => {
                     return (
                       <Container fluid>
-                        <Row>
+                        <Row className="p-0">
                           <Col>
-                            <Row>
-                              <h4>Breakfast</h4>
-                            </Row>
-                            <Row>
-                              <MealCard></MealCard>
-                              <MealCard></MealCard> <MealCard></MealCard>
+                            <h4>Breakfast</h4>
+
+                            <Row className="p-0 m-0">
+                              <MealCard handleShow={handleShow} />
                             </Row>
                           </Col>
                           <Col>
-                            <Row>
-                              <h4>Breakfast</h4>
+                            <h4>Lunch</h4>
+
+                            <Row className="p-0 m-0">
+                              <MealCard handleShow={handleShow} />
+
+                              <MealCard handleShow={handleShow} />
                             </Row>
-                            <Row>
-                              <MealCard></MealCard>
-                              <MealCard></MealCard>
-                            </Row>
-                          </Col>{' '}
+                          </Col>
                           <Col>
-                            <Row>
-                              <h4>Breakfast</h4>
-                            </Row>
-                            <Row>
-                              <MealCard></MealCard>
-                              <MealCard></MealCard>
+                            <h4>Dinner</h4>
+
+                            <Row className="p-0 m-0">
+                              <MealCard handleShow={handleShow} />
+                              <MealCard handleShow={handleShow} />
+                              <MealCard handleShow={handleShow} />
                             </Row>
                           </Col>
                         </Row>
@@ -135,6 +140,12 @@ function MealPlanner() {
           );
         })}
       </Row>
+      <Modal size="lg" show={show} onHide={handleClose} fullscreen="true">
+        <Modal.Header closeButton>
+          <Modal.Title>Recipe Title</Modal.Title>
+        </Modal.Header>
+        <ViewMeal />
+      </Modal>
     </Container>
   );
 }

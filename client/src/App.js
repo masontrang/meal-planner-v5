@@ -13,6 +13,8 @@ import Landing from './components/Landing';
 import Login from './components/Login';
 import Logout from './components/Logout';
 import SignUp from './components/SignUp';
+import Preferences from './components/Preferences';
+import ViewMeal from './components/ViewMeal';
 export const DetailsContext = React.createContext();
 
 function App() {
@@ -61,6 +63,14 @@ function App() {
     {
       path: '/collaborate',
       element: <Collaborate />,
+    },
+    {
+      path: '/preferences',
+      element: <Preferences />,
+    },
+    {
+      path: '/viewmeal/*',
+      element: <ViewMeal />,
     },
   ]);
   return (
